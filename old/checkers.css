@@ -1,0 +1,26 @@
+.checker-container{
+	height: 99vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+table{
+	width: 35rem;
+	height: 35rem;
+	background-color: orange;
+}
+tr{
+
+}
+td {
+	
+	border: 2px solid black;
+
+}
+.red{
+	background-color: red;
+}
+.black{
+	background-color: black;
+}

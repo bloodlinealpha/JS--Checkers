@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Checkers</title>
+	<link rel="stylesheet" type="text/css" href="checkers_2.css">
+	<script
+  src="https://code.jquery.com/jquery-3.5.1.js"
+  integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+  crossorigin="anonymous"></script>
+
+	<script>
+
+function move_black(){
+
+		
+
+}
+
+function move_red(){
+
+		
+
+}
+
+
+
+
+
+
+$(document).ready(function(){
+
+
+
+//make even rows and odds rows
+	for(i=0; i<4; i++){
+		ii= eval(i+1);
+		$('.checker-board').append('\
+			<div id="even_'+ii+'" class="checker-rows-even cr"></div>\
+			');
+		$('.checker-board').append('\
+			<div id="odd_'+ii+'" class="checker-rows-odd cr"></div>\
+			');
+	}
+	
+
+	counter=0;
+	$('.checker-rows-even').each(function(){
+		for(i=0; i<8; i++){
+			counter++;
+			$(this).append('<div data-cell="'+counter+'" class="checker-cell"></div>');
+		}
+	});
+
+	counter_2=33;
+	$('.checker-rows-odd').each(function(){
+		for(i=0; i<8; i++){
+			counter_2++;
+			$(this).append('<div data-cell="'+counter_2+'" class="checker-cell"></div>');
+		}
+	});
+
+	$('.checker-rows-even > div').each(function(i){
+		cell = $(this).attr('data-cell');
+
+		if(cell % 2 === 0){
+			$(this).addClass('red');
+		}else{
+			$(this).addClass('black');
+				if(cell <= 15 || cell >= 25){
+					$(this).append('<div data-checker="'+i+'" class="checker"></div>');
+				}
+				
+			
+		}
+
+	});
+	$('.checker-rows-odd > div').each(function(i){
+		cell = $(this).attr('data-cell');
+
+		if(cell % 2 === 0){
+			$(this).addClass('red');
+		}else{
+			$(this).addClass('black');
+			if(cell >= 51 || cell <= 41 ){
+					$(this).append('<div data-checker="'+i+'" class="checker"></div>');
+				}
+		
+		}
+
+	});
+
+	$('.checker').each(function(){
+		if($(this).attr('data-checker') <= 14){
+			$(this).addClass('red-checker');
+			$(this).html('Red')
+		}else if ($(this).attr('data-checker') > 14){
+			$(this).addClass('black-checker');
+			$(this).html('Black');
+		}
+	});
+
+
+	// add 1,2,3,4 to data-count
+	$('.checker-rows-even').each(function(i){
+		$(this).children('.black').each(function(p){
+			pp =eval(p+1);
+			$(this).attr('data-count', pp);
+			$(this).prepend('<div class="move-count">'+pp+'</div>');
+		});
+		
+	});
+
+	// add 1,2,3,4 to data-count
+	$('.checker-rows-odd').each(function(i){
+		$(this).children('.black').each(function(p){
+			pp =eval(p+1);
+			$(this).attr('data-count', pp);
+			$(this).prepend('<div class="move-count">'+pp+'</div>');
+		});
+		
+	});
+	$('.cr').each(function(p){
+		pp =eval(p+1);
+			$(this).attr('data-rows', pp);
+	});
+
+
+
+	//testing info
+
+	//remove checker for testing
+	/*$('.checker-cell').each(function(i){
+		if($(this).attr('data-cell') == 51){
+			$(this).empty();
+		}
+		if($(this).attr('data-cell') == 53){
+			$(this).empty();
+		}
+		if($(this).attr('data-cell') == 55){
+			$(this).empty();
+		}
+		if($(this).attr('data-cell') == 57){
+			$(this).empty();
+		}
+	});
+
+
+	//add a checker for testing
+	$('.checker-cell').each(function(i){
+		if($(this).attr('data-cell') == 17){
+			$(this).append('<div data-checker="99" class="checker black-checker">Black</div>');
+		}
+		if($(this).attr('data-cell') == 19){
+			$(this).append('<div data-checker="100" class="checker black-checker">Black</div>');
+		}
+		if($(this).attr('data-cell') == 21){
+			$(this).append('<div data-checker="101" class="checker black-checker">Black</div>');
+		}
+	});
+	*/
+
+
+
+
+
+alert("Black goes first turn");
+var turn_black = true;
+$(document).on('click', '.checker-cell', function(){
+
+	
+	if (turn_black) {
+		//count checkers
+		checker_init = 12;
+		red_checker_count = 0;
+		$('.red-checker').each(function(i){
+			red_checker_count++;
+		});
+
+		black_checker_count = 0;
+		$('.black-checker').each(function(i){
+			black_checker_count++;
+		});
+
+		
+		
+		if( $('.checker-cell').hasClass('move-checker') ){
+			//get data-count clicked for the row
+			move_row_count = $(this).parent().attr('data-rows');
+			//get data for if a checker exists
+			move_checker_conflict = $(this).children('.checker').length;
+			//get cell data-count attribute
+			move_checkercell_count = $(this).attr('data-count');
+
+
+			//make sure moving up the board -- change for red checkers
+			if (move_row_count < select_row_count) {
+				
+				//black, red, and no checker in move area
+				if (move_checker_conflict == 0 ) {
+						//for next row empty
+						if(move_row_count == eval(select_row_count) - 1){
+							//if row is even
+							if(select_row_count % 2 === 0){
+								// if same or 1 cell can be moved to
+								if( select_checkercell_count == move_checkercell_count || eval(move_checkercell_count - select_checkercell_count == 1) ){
+									console.log("valid move");
+									
+									$('.checker-cell[data-cell="'+select_cell+'"]').empty();
+									$('.checker-cell[data-cell="'+select_cell+'"]').append(select_move_number);
+									$(this).append(select_move);
+									$('.checker-cell').removeClass('move-checker');
+									//update done counter
+									//alert('Move completed');
+
+									turn_black = false;
+									
+									
+									
+									
+									
+									
+
+									
+									
+
+								}else{
+									console.log("invalid move - pick ajoining cell");
+								}
+							//if row is odd
+							}else{
+								// if same or -1 can be moved to
+								if( select_checkercell_count == move_checkercell_count || eval(move_checkercell_count - select_checkercell_count == -1) ){
+									console.log("valid move");
+									$('.checker-cell[data-cell="'+select_cell+'"]').empty();
+									$('.checker-cell[data-cell="'+select_cell+'"]').append(select_move_number);
+									$(this).append(select_move);
+									$('.checker-cell').removeClass('move-checker');
+									//update done counter
+									//alert('Move completed');
+
+									turn_black = false;
+								
+									
+									
+									
+									
+									
+								}else{
+									alert("invalid move - pick ajoining cell");
+								}
+							}
+						}else{
+							//check if next row contains red checkers
+							if(select_row_next !=0){
+								console.log("there are red checkers in next row");
+							
+								if( move_checkercell_count == eval(select_checkercell_count) - 1 ||  move_checkercell_count == eval(select_checkercell_count) + 1 ){
+									console.log('valid cell to jump to');
+
+									//find red checkers location
+									reds = []
+									$('.cr').each(function(i){
+										each_red = $(this).children().children('.red-checker')
+										$.each(each_red, function(p){
+											row = $(this).parent().parent().attr('data-rows');
+											red = $(this).parent().attr('data-count');
+											red_data_cell = $(this).parent().attr('data-cell');
+											reds.push({'row': row,
+														'cell': red,
+														'data_cell': red_data_cell});
+										});
+									});
+									//get init $this
+									this_this = $(this);
+									//find red checker to jump
+									jump_count = 0;
+									$.each(reds, function(i, v){
+										if( v.row == eval(select_row_count) - 1 ){
+											// console.log('Red in: '+v.cell);
+											//if row is even
+											if(select_row_count % 2 === 0){
+												if(move_checkercell_count == v.cell && eval(move_checkercell_count) - 1 == select_checkercell_count ){
+													jump_count++
+													//move to black checker
+													$('.checker-cell[data-cell="'+select_cell+'"]').empty();
+													$('.checker-cell[data-cell="'+select_cell+'"]').append(select_move_number);
+													this_this.append(select_move);
+													$('.checker-cell').removeClass('move-checker');
+													//remove red checker
+													$('.checker-cell[data-cell="'+v.data_cell+'"]').empty();
+													$('.checker-cell[data-cell="'+v.data_cell+'"]').append(select_move_number);
+													//update done counter
+													alert('Jump Move completed');
+													$('.checker-cell').removeClass('move-checker');
+													turn_black = false;
+									
+													return false;
+												}
+												if( eval(move_checkercell_count) + 1 == v.cell && eval(move_checkercell_count) + 1 == select_checkercell_count){
+													jump_count++
+													//move to black checker
+													$('.checker-cell[data-cell="'+select_cell+'"]').empty();
+													$('.checker-cell[data-cell="'+select_cell+'"]').append(select_move_number);
+													this_this.append(select_move);
+													$('.checker-cell').removeClass('move-checker');
+													//remove red checker
+													$('.checker-cell[data-cell="'+v.data_cell+'"]').empty();
+													$('.checker-cell[data-cell="'+v.data_cell+'"]').append(select_move_number);
+													//update done counter
+													alert('Jump Move completed');
+													$('.checker-cell').removeClass('move-checker');
+													turn_black = false;
+												
+													return false;
+
+												}
+											//if odd
+											}else{
+												
+												if( move_checkercell_count == v.cell && eval(move_checkercell_count) + 1 == select_checkercell_count ){
+													jump_count++
+													//move to black checker
+													$('.checker-cell[data-cell="'+select_cell+'"]').empty();
+													$('.checker-cell[data-cell="'+select_cell+'"]').append(select_move_number);
+													this_this.append(select_move);
+													$('.checker-cell').removeClass('move-checker');
+													//remove red checker
+													$('.checker-cell[data-cell="'+v.data_cell+'"]').empty();
+													$('.checker-cell[data-cell="'+v.data_cell+'"]').append(select_move_number);
+													//update done counter
+													alert('Jump Move completed');
+													$('.checker-cell').removeClass('move-checker');
+													turn_black = false;
+												
+													
+													return false;
+												}
+												if( eval(move_checkercell_count) - 1 == v.cell && eval(move_checkercell_count) - 1 == select_checkercell_count){
+													jump_count++
+													//move to black checker
+													$('.checker-cell[data-cell="'+select_cell+'"]').empty();
+													$('.checker-cell[data-cell="'+select_cell+'"]').append(select_move_number);
+													this_this.append(select_move);
+													$('.checker-cell').removeClass('move-checker');
+													//remove red checker
+													$('.checker-cell[data-cell="'+v.data_cell+'"]').empty();
+													$('.checker-cell[data-cell="'+v.data_cell+'"]').append(select_move_number);
+													//update done counter
+													alert('Jump Move completed');
+													$('.checker-cell').removeClass('move-checker');
+													turn_black = false;
+												
+													return false;
+
+												}
+
+											}
+											
+										}
+									});
+									// if no checker to jump...
+									if(jump_count === 0){
+										alert('invalid - nothing to jump');
+									}
+
+								}else{
+									alert('invalid jump position');
+								}
+
+							}else{
+								alert("invalid - You cannot move to that row");
+							}
+							
+						}
+
+				// if length is not 0 = checker in cell
+				}else{
+					alert("invalid move - there is already checker there");
+				}
+			}else{
+				//black, red, and no checker to side or behind
+				if (move_checker_conflict != 0 ) {
+					alert("invalid move - there is already checker there + you must move forward! B");
+					$('.checker-cell').removeClass('move-checker');
+				}else{
+					alert("invalid move - you must move forward!");
+					$('.checker-cell').removeClass('move-checker');
+				}
+				
+			}
+
+		}else{
+			//needs to be black checker to select				
+			if (( $(this).children('.checker').length != 0) && ( $(this).children('.black-checker').length != 0) )  {		
+				//highlight checker to move
+				$(this).addClass('move-checker');
+
+				//info about cell selected:
+				select_row_count = $(this).parent().attr('data-rows');
+				select_row_next = $('[data-rows="'+eval(select_row_count-1)+'"]').children().children('.red-checker').length;
+				select_checkercell_count = $(this).attr('data-count');
+				/*select_row = $(this).parent().attr('id');
+				select_checker = $(this).children('.checker').attr('data-checker');*/
+
+				//info to move selected checker
+				select_move = $(this).children('.black-checker').get(0).outerHTML;
+				select_move_number = $(this).children('.move-count').get(0).outerHTML;
+				select_cell = $(this).attr('data-cell');
+				
+				
+				//allow only 1 to be highlighted
+				if ($('.checker-cell').hasClass('move-checker')) {
+
+					$('.checker-cell').removeClass('move-checker');
+					$(this).addClass('move-checker');
+
+				}
+				
+			}else{
+				alert("Invalid...Select a black checker please")
+			}
+		}
+	}else{
+		//count checkers
+		checker_init = 12;
+		red_checker_count = 0;
+		$('.red-checker').each(function(i){
+			red_checker_count++;
+		});
+
+		black_checker_count = 0;
+		$('.black-checker').each(function(i){
+			black_checker_count++;
+		});
+
+		
+
+		if( $('.checker-cell').hasClass('move-checker') ){
+			//get data-count clicked for the row
+			move_row_count = $(this).parent().attr('data-rows');
+			//get data for if a checker exists
+			move_checker_conflict = $(this).children('.checker').length;
+			//get cell data-count attribute
+			move_checkercell_count = $(this).attr('data-count');
+
+			
+
+			//make sure moving up the board -- change for red checkers - --changed for red
+			if (move_row_count > select_row_count) {
+				
+				//black, red, and no checker in move area
+				if (move_checker_conflict == 0 ) {
+						//for next row empty - --changed for red
+						if(move_row_count == eval(select_row_count) + 1){
+							//if row is even
+							if(select_row_count % 2 === 0){
+								// if same or 1 cell can be moved to
+								if( select_checkercell_count == move_checkercell_count || eval(move_checkercell_count - select_checkercell_count == 1) ){
+									console.log("valid move");
+									
+									$('.checker-cell[data-cell="'+select_cell+'"]').empty();
+									$('.checker-cell[data-cell="'+select_cell+'"]').append(select_move_number);
+									$(this).append(select_move);
+									$('.checker-cell').removeClass('move-checker');
+									//update done counter
+									//alert('Move completed');
+									turn_black = true;
+									
+									
+									
+									
+									
+
+								}else{
+									alert("invalid move - pick ajoining cell");
+								}
+							//if row is odd
+							}else{
+								// if same or -1 can be moved to
+								if( select_checkercell_count == move_checkercell_count || eval(move_checkercell_count - select_checkercell_count == -1) ){
+									console.log("valid move");
+									$('.checker-cell[data-cell="'+select_cell+'"]').empty();
+									$('.checker-cell[data-cell="'+select_cell+'"]').append(select_move_number);
+									$(this).append(select_move);
+									$('.checker-cell').removeClass('move-checker');
+									//update done counter
+									//alert('Move completed');
+									turn_black = true;
+									
+									
+									
+									
+									
+								}else{
+									alert("invalid move - pick ajoining cell");
+								}
+							}
+						}else{
+							//check if next row contains black checkers
+							if(select_row_next !=0){
+								console.log("there are black checkers in next row");
+							
+								if( move_checkercell_count == eval(select_checkercell_count) - 1 ||  move_checkercell_count == eval(select_checkercell_count) + 1 ){
+									console.log('valid cell to jump to');
+
+									//find black checkers location
+									blacks = []
+									$('.cr').each(function(i){
+										each_black = $(this).children().children('.black-checker')
+										$.each(each_black, function(p){
+											row = $(this).parent().parent().attr('data-rows');
+											black = $(this).parent().attr('data-count');
+											black_data_cell = $(this).parent().attr('data-cell');
+											blacks.push({'row': row,
+														'cell': black,
+														'data_cell': black_data_cell});
+										});
+									});
+									//get init $this
+									this_this = $(this);
+									//find red checker to jump
+									jump_count = 0;
+									$.each(blacks, function(i, v){
+										if( v.row == eval(select_row_count) + 1 ){
+											// console.log('Black in: '+v.cell);
+											//if row is even
+											if(select_row_count % 2 === 0){
+												if(move_checkercell_count == v.cell && eval(move_checkercell_count) - 1 == select_checkercell_count ){
+													jump_count++
+													//move red checker
+													$('.checker-cell[data-cell="'+select_cell+'"]').empty();
+													$('.checker-cell[data-cell="'+select_cell+'"]').append(select_move_number);
+													this_this.append(select_move);
+													$('.checker-cell').removeClass('move-checker');
+													//remove black checker
+													$('.checker-cell[data-cell="'+v.data_cell+'"]').empty();
+													$('.checker-cell[data-cell="'+v.data_cell+'"]').append(select_move_number);
+													//update done counter
+													alert('Jump Move completed');
+													$('.checker-cell').removeClass('move-checker');
+													turn_black = true;
+													
+													
+													return false;
+												}
+												if( eval(move_checkercell_count) + 1 == v.cell && eval(move_checkercell_count) + 1 == select_checkercell_count){
+													jump_count++
+													//move red checker
+													$('.checker-cell[data-cell="'+select_cell+'"]').empty();
+													$('.checker-cell[data-cell="'+select_cell+'"]').append(select_move_number);
+													this_this.append(select_move);
+													$('.checker-cell').removeClass('move-checker');
+													//remove black checker
+													$('.checker-cell[data-cell="'+v.data_cell+'"]').empty();
+													$('.checker-cell[data-cell="'+v.data_cell+'"]').append(select_move_number);
+													//update done counter
+													alert('Jump Move completed');
+													$('.checker-cell').removeClass('move-checker');
+													turn_black = true;
+													
+													
+													return false;
+
+												}
+											//if odd
+											}else{
+												if(move_checkercell_count == v.cell && eval(move_checkercell_count) + 1 == select_checkercell_count ){
+													jump_count++
+													//move red checker
+													$('.checker-cell[data-cell="'+select_cell+'"]').empty();
+													$('.checker-cell[data-cell="'+select_cell+'"]').append(select_move_number);
+													this_this.append(select_move);
+													$('.checker-cell').removeClass('move-checker');
+													//remove black checker
+													$('.checker-cell[data-cell="'+v.data_cell+'"]').empty();
+													$('.checker-cell[data-cell="'+v.data_cell+'"]').append(select_move_number);
+													//update done counter
+													alert('Jump Move completed');
+													$('.checker-cell').removeClass('move-checker');
+													turn_black = true;
+													
+													return false;
+												}
+												if( eval(move_checkercell_count) -1 == v.cell && eval(move_checkercell_count) - 1 == select_checkercell_count){
+													jump_count++
+													//move red checker
+													$('.checker-cell[data-cell="'+select_cell+'"]').empty();
+													$('.checker-cell[data-cell="'+select_cell+'"]').append(select_move_number);
+													this_this.append(select_move);
+													$('.checker-cell').removeClass('move-checker');
+													//remove blackchecker
+													$('.checker-cell[data-cell="'+v.data_cell+'"]').empty();
+													$('.checker-cell[data-cell="'+v.data_cell+'"]').append(select_move_number);
+													//update done counter
+													alert('Jump Move completed');
+													$('.checker-cell').removeClass('move-checker');
+													turn_black = true;
+											
+												
+													return false;
+
+												}
+
+											}
+											
+										}
+									});
+									// if no checker to jump...
+									if(jump_count === 0){
+										alert('invalid - nothing to jump');
+									}
+
+								}else{
+									alert('invalid jump position');
+								}
+
+							}else{
+								alert("invalid - You cannot move to that row");
+							}
+							
+						}
+
+				// if length is not 0 = checker in cell
+				}else{
+					alert("invalid move - there is already checker there");
+				}
+			}else{
+				//black, red, and no checker to side or behind
+				if (move_checker_conflict != 0 ) {
+					alert("invalid move - there is already checker there + you must move forward!");
+					$('.checker-cell').removeClass('move-checker');
+				}else{
+					alert("invalid move - you must move forward!");
+					$('.checker-cell').removeClass('move-checker');
+				}
+				
+			}
+
+		}else{
+			//needs to be red checker to select				
+			if (( $(this).children('.checker').length != 0) && ( $(this).children('.red-checker').length != 0) )  {		
+				//highlight checker to move
+				$(this).addClass('move-checker');
+
+				//info about cell selected:
+				select_row_count = $(this).parent().attr('data-rows');
+				select_row_next = $('[data-rows="'+(eval(select_row_count)+1)+'"]').children().children('.black-checker').length;
+				select_checkercell_count = $(this).attr('data-count');
+				/*select_row = $(this).parent().attr('id');
+				select_checker = $(this).children('.checker').attr('data-checker');*/
+
+				//info to move selected checker
+				select_move = $(this).children('.red-checker').get(0).outerHTML;
+				select_move_number = $(this).children('.move-count').get(0).outerHTML;
+				select_cell = $(this).attr('data-cell');
+				
+				
+				//allow only 1 to be highlighted
+				if ($('.checker-cell').hasClass('move-checker')) {
+
+					$('.checker-cell').removeClass('move-checker');
+					$(this).addClass('move-checker');
+
+				}
+				
+			}else{
+				alert("Invalid...Select a red checker please")
+			}
+		}
+
+	}
+	
+});
+
+
+
+			
+
+
+
+			
+
+
+
+
+
+
+
+
+
+		
+
+});
+		
+	</script>
+</head>
+<body>
+	<div class="checker-container">
+		<div class="checker-outline">
+			<div class="checker-board">
+	
+			</div>
+		</div>
+		
+		
+	</div>
+
+	
+
+	
+	
+
+</body>
+</html>

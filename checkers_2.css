@@ -1,0 +1,79 @@
+.checker-container{
+	background-color: red;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border: 10px solid black;
+	height: 38rem;
+	width: 38rem;
+}
+
+.checker-outline{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border: 5px solid black;
+	width: 97%;
+	height: 97%;
+}
+.checker-board{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	border-left: 2px solid orange;
+	border-right: 2px solid orange;
+	border-top: 2px solid orange;
+	border-bottom: 2px solid orange;
+	width: 97%;
+	height: 97%;
+}
+.checker-rows-even, .checker-rows-odd{
+	display: flex;
+	flex-direction: row;
+	
+	width: 100%;
+	height: 100%;
+
+}
+.checker-cell{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border: 2px solid orange;
+	width: 100%;
+	color: white;
+
+}
+.red{
+	background-color: red;
+}
+.black{
+	background-color: black;
+}
+.checker{
+	border: 1px solid red;
+	border-radius: 50%;
+	padding: 10px;
+}
+.red-checker{
+	background-color: red;
+}
+.black-checker{
+	background-color: black;
+}
+
+@keyframes move {
+	from{
+		background-color: :red;
+	}
+	to{
+		background-color: yellow;
+	}
+}
+.move-checker{
+	animation-name: move;
+	animation-duration: 1s;
+	animation-fill-mode: forwards;
+
+}

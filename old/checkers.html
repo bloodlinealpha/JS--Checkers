@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Checkers</title>
+	<link rel="stylesheet" type="text/css" href="checkers.css">
+	<script
+  src="https://code.jquery.com/jquery-3.5.1.js"
+  integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+  crossorigin="anonymous"></script>
+
+	<script>
+		$(document).ready(function(){
+			//create table columns = 8
+			for (var i=0; i < 8; i++){
+				$('#checker').append('<tr id="rows_'+i+'" class="rows" data-row="'+i+'"></tr>');
+			}
+
+			//create table rows = 8
+
+			counter=0;
+			$('.rows').each(function(p){
+				pp =  eval(p+1);
+				for (var i=0; i < 8; i++){
+					counter++;
+					$(this).append('<td id="'+counter+'" class="cell">'+ counter +'</td>');
+				}
+			});
+			counter_2=0;
+			$('tr').each(function(p){
+				for (var i=0; i < 8; i++){
+					if(pp % 2 === 0){
+						$(this).addClass('red');
+					}else{
+						$(this).addClass('black');
+					}
+				}
+			});
+			
+			
+			
+
+		});
+		
+	</script>
+</head>
+<body>
+	<div class="checker-container">
+		<table id="checker">
+		</table>
+	</div>
+	
+
+</body>
+</html>
