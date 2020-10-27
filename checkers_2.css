@@ -1,6 +1,20 @@
+body{
+	height: 100vh;
+	margin: 0px;
+}
+.flex-container{
+
+	display: flex;
+	flex-direction: row;
+	margin-left: 25vw;
+	justify-content: center;
+	align-items: center;
+
+}
 .checker-container{
 	background-color: red;
 	display: flex;
+	flex-shrink: 1;
 	justify-content: center;
 	align-items: center;
 	border: 10px solid black;
@@ -42,6 +56,7 @@
 	align-items: center;
 	border: 2px solid orange;
 	width: 100%;
+
 	color: white;
 
 }
@@ -52,15 +67,19 @@
 	background-color: black;
 }
 .checker{
-	border: 1px solid red;
+	
 	border-radius: 50%;
-	padding: 10px;
+	padding: 1.5rem;
 }
 .red-checker{
-	background-color: red;
+	background-image: url(img/red_checker.png);
+	background-repeat: no-repeat;
+	background-size: cover;
 }
 .black-checker{
-	background-color: black;
+	background-image: url(img/black_checker.png);
+	background-repeat: no-repeat;
+	background-size: cover;
 }
 
 @keyframes move {
@@ -90,4 +109,35 @@
 	animation-duration: 1s;
 	animation-fill-mode: forwards;
 
+}
+
+
+.score-container{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	width: 10rem;
+	margin: 5rem;
+
+
+}
+.score-board{
+	border: 2px solid black;
+	display: flex;
+	flex-direction: column;
+	padding: 10px;
+	width: auto;
+
+
+}
+h3{
+	margin: 0px;
+}
+.score{
+	margin-bottom: 10px;
+}
+.reset_button{
+	margin-top: 10px;
+	height: 1.5rem;
+	width: 7rem;
 }
