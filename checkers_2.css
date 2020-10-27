@@ -77,3 +77,17 @@
 	animation-fill-mode: forwards;
 
 }
+@keyframes double {
+	from{
+		background-color: :black;
+	}
+	to{
+		background-color: green;
+	}
+}
+.move-double{
+	animation-name: double;
+	animation-duration: 1s;
+	animation-fill-mode: forwards;
+
+}
