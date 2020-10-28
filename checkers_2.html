@@ -85,7 +85,7 @@
 				$(this).children('.black').each(function(p){
 					pp =eval(p+1);
 					$(this).attr('data-count', pp);
-					$(this).prepend('<div class="move-count"></div>');
+					//$(this).prepend('<div class="move-count"></div>');
 				});
 				
 			});
@@ -95,7 +95,7 @@
 				$(this).children('.black').each(function(p){
 					pp =eval(p+1);
 					$(this).attr('data-count', pp);
-					$(this).prepend('<div class="move-count"></div>');
+					//$(this).prepend('<div class="move-count"></div>');
 				});
 				
 			});
@@ -183,6 +183,13 @@
 
 				$('#red_score').html(red_checker_count);
 				$('#black_score').html(black_checker_count);
+
+				if( $('#red_score').html() == 0 ){
+					alert("Black wins!... press the reset button to play again!!");
+				}
+				if( $('#black_score').html() == 0 ){
+					alert("Red wins!... press the reset button to play again!!");
+				}
 			//<----------------------------------->
 
 
@@ -217,7 +224,6 @@
 											console.log("valid move");
 										
 											$('.checker-cell[data-cell="'+select_cell+'"]').empty();
-											$('.checker-cell[data-cell="'+select_cell+'"]').append(select_move_number);
 											$(this).append(select_move);
 											$('.checker-cell').removeClass('move-checker');
 											$('.checker-cell').removeClass('move-double');
@@ -237,7 +243,7 @@
 											console.log("valid move");
 											
 											$('.checker-cell[data-cell="'+select_cell+'"]').empty();
-											$('.checker-cell[data-cell="'+select_cell+'"]').append(select_move_number);
+											
 											$(this).append(select_move);
 											$('.checker-cell').removeClass('move-checker');
 											$('.checker-cell').removeClass('move-double');
@@ -292,7 +298,7 @@
 											//find red checker to jump
 											jump_count = 0;
 											$.each(reds, function(i, v){
-												//if going down board----------->
+												//if going down board 1 -----------> 8
 												if( v.row == eval(select_row_count) - 1 ){
 													// console.log('Red in: '+v.cell);
 													//if row is even
@@ -303,14 +309,14 @@
 															
 															//move to black checker
 															$('.checker-cell[data-cell="'+select_cell+'"]').empty();
-															$('.checker-cell[data-cell="'+select_cell+'"]').append(select_move_number);
+															
 															this_this.append(select_move);
 															$('.checker-cell').removeClass('move-checker');
 															//remove red checker
 															$('.checker-cell[data-cell="'+v.data_cell+'"]').empty();
-															$('.checker-cell[data-cell="'+v.data_cell+'"]').append(select_move_number);
+															
 															//update done counter
-															alert('Jump Move completed');
+															
 															
 															//even double jump
 															if ( move_row_count_double == 4) {
@@ -333,7 +339,7 @@
 																			double_next_left = "yes"
 																			console.log('left');
 																		}
-																		if( val.cell == eval(move_checkercell_count) - 1 ){
+																		if( val.cell == eval(move_checkercell_count) + 1 ){
 																			double_next_right = "yes"
 																			console.log('right');
 																		}	
@@ -407,14 +413,14 @@
 
 															//move to black checker
 															$('.checker-cell[data-cell="'+select_cell+'"]').empty();
-															$('.checker-cell[data-cell="'+select_cell+'"]').append(select_move_number);
+															
 															this_this.append(select_move);
 															$('.checker-cell').removeClass('move-checker');
 															//remove red checker
 															$('.checker-cell[data-cell="'+v.data_cell+'"]').empty();
-															$('.checker-cell[data-cell="'+v.data_cell+'"]').append(select_move_number);
+															
 															//update done counter
-															alert('Jump Move completed');
+															
 															
 															//even double jump
 															if ( move_row_count_double == 4) {
@@ -437,7 +443,7 @@
 																			double_next_left = "yes"
 																			console.log('left');
 																		}
-																		if( val.cell == eval(move_checkercell_count) - 1 ){
+																		if( val.cell == eval(move_checkercell_count) + 1 ){
 																			double_next_right = "yes"
 																			console.log('right');
 																		}	
@@ -514,14 +520,14 @@
 
 																//move to black checker
 																$('.checker-cell[data-cell="'+select_cell+'"]').empty();
-																$('.checker-cell[data-cell="'+select_cell+'"]').append(select_move_number);
+																
 																this_this.append(select_move);
 																$('.checker-cell').removeClass('move-checker');
 																//remove red checker
 																$('.checker-cell[data-cell="'+v.data_cell+'"]').empty();
-																$('.checker-cell[data-cell="'+v.data_cell+'"]').append(select_move_number);
+																
 																//update done counter
-																alert('Jump Move completed');
+																
 																
 																//odd doubel jump
 																if ( move_row_count_double == 4) {
@@ -617,16 +623,16 @@
 
 															//move to black checker
 															$('.checker-cell[data-cell="'+select_cell+'"]').empty();
-															$('.checker-cell[data-cell="'+select_cell+'"]').append(select_move_number);
+															
 															this_this.append(select_move);
 															$('.checker-cell').removeClass('move-checker');
 															//remove red checker
 															$('.checker-cell[data-cell="'+v.data_cell+'"]').empty();
-															$('.checker-cell[data-cell="'+v.data_cell+'"]').append(select_move_number);
-															//update done counter
-															alert('Jump Move completed');
 															
-															//odd doubel jump
+															//update done counter
+															
+															
+															//odd double jump
 															if ( move_row_count_double == 4) {
 																console.log("no double jump possible");
 																$('.checker-cell').removeClass('move-checker');
@@ -729,14 +735,14 @@
 															
 															//move to black checker
 															$('.checker-cell[data-cell="'+select_cell+'"]').empty();
-															$('.checker-cell[data-cell="'+select_cell+'"]').append(select_move_number);
+															
 															this_this.append(select_move);
 															$('.checker-cell').removeClass('move-checker');
 															//remove red checker
 															$('.checker-cell[data-cell="'+v.data_cell+'"]').empty();
-															$('.checker-cell[data-cell="'+v.data_cell+'"]').append(select_move_number);
+															
 															//update done counter
-															alert('Jump Move completed');
+															
 															
 															//even double jump
 															if ( move_row_count_double == 4) {
@@ -832,14 +838,14 @@
 
 															//move to black checker
 															$('.checker-cell[data-cell="'+select_cell+'"]').empty();
-															$('.checker-cell[data-cell="'+select_cell+'"]').append(select_move_number);
+															
 															this_this.append(select_move);
 															$('.checker-cell').removeClass('move-checker');
 															//remove red checker
 															$('.checker-cell[data-cell="'+v.data_cell+'"]').empty();
-															$('.checker-cell[data-cell="'+v.data_cell+'"]').append(select_move_number);
+															
 															//update done counter
-															alert('Jump Move completed');
+															
 															
 															//even double jump
 															if ( move_row_count_double == 4) {
@@ -938,14 +944,14 @@
 
 															//move to black checker
 															$('.checker-cell[data-cell="'+select_cell+'"]').empty();
-															$('.checker-cell[data-cell="'+select_cell+'"]').append(select_move_number);
+															
 															this_this.append(select_move);
 															$('.checker-cell').removeClass('move-checker');
 															//remove red checker
 															$('.checker-cell[data-cell="'+v.data_cell+'"]').empty();
-															$('.checker-cell[data-cell="'+v.data_cell+'"]').append(select_move_number);
+															
 															//update done counter
-															alert('Jump Move completed');
+															
 															
 															//odd double jump
 															if ( move_row_count_double == 4) {
@@ -964,7 +970,7 @@
 																$.each(reds, function(key,val){
 																	if(val.row == eval(select_row_count) + 3){
 																		
-																		if( val.cell == eval(move_checkercell_count) + 1 ){
+																		if( val.cell == eval(move_checkercell_count) - 1 ){
 																			double_next_left = "yes"
 																			console.log('left');
 																		}
@@ -1041,14 +1047,14 @@
 
 															//move to black checker
 															$('.checker-cell[data-cell="'+select_cell+'"]').empty();
-															$('.checker-cell[data-cell="'+select_cell+'"]').append(select_move_number);
+															
 															this_this.append(select_move);
 															$('.checker-cell').removeClass('move-checker');
 															//remove red checker
 															$('.checker-cell[data-cell="'+v.data_cell+'"]').empty();
-															$('.checker-cell[data-cell="'+v.data_cell+'"]').append(select_move_number);
+															
 															//update done counter
-															alert('Jump Move completed');
+															
 															
 															//odd doubel jump
 															if ( move_row_count_double == 4) {
@@ -1067,7 +1073,7 @@
 																$.each(reds, function(key,val){
 																	if(val.row == eval(select_row_count) + 3){
 																		
-																		if( val.cell == eval(move_checkercell_count) + 1 ){
+																		if( val.cell == eval(move_checkercell_count) - 1 ){
 																			double_next_left = "yes"
 																			console.log('left');
 																		}
@@ -1184,10 +1190,10 @@
 													
 													//change to k and add black king class
 													$('.checker-cell[data-cell="'+select_cell+'"]').empty();
-													$('.checker-cell[data-cell="'+select_cell+'"]').append(select_move_number);
+													
 													$(this).append(select_move);
 													$(this).children('.black-checker').addClass('black-king');
-													$(this).children('.black-king').html('King');
+													
 									
 													$('.checker-cell').removeClass('move-checker');
 													$('.checker-cell').removeClass('move-double');
@@ -1199,7 +1205,7 @@
 												}else{
 												
 													$('.checker-cell[data-cell="'+select_cell+'"]').empty();
-													$('.checker-cell[data-cell="'+select_cell+'"]').append(select_move_number);
+													
 													$(this).append(select_move);
 													$('.checker-cell').removeClass('move-checker');
 													$('.checker-cell').removeClass('move-double');
@@ -1222,10 +1228,10 @@
 													
 													//change to k and add black king class
 													$('.checker-cell[data-cell="'+select_cell+'"]').empty();
-													$('.checker-cell[data-cell="'+select_cell+'"]').append(select_move_number);
+													
 													$(this).append(select_move);
 													$(this).children('.black-checker').addClass('black-king');
-													$(this).children('.black-king').html('King');
+													
 									
 													$('.checker-cell').removeClass('move-checker');
 													$('.checker-cell').removeClass('move-double');
@@ -1236,7 +1242,7 @@
 													turn_black = false;
 												}else{
 													$('.checker-cell[data-cell="'+select_cell+'"]').empty();
-													$('.checker-cell[data-cell="'+select_cell+'"]').append(select_move_number);
+													
 													$(this).append(select_move);
 													$('.checker-cell').removeClass('move-checker');
 													$('.checker-cell').removeClass('move-double');
@@ -1305,13 +1311,13 @@
 													
 																	//change to k and add black king class
 																	$('.checker-cell[data-cell="'+select_cell+'"]').empty();
-																	$('.checker-cell[data-cell="'+select_cell+'"]').append(select_move_number);
+																	
 																	this_this.append(select_move);
 																	this_this.children('.black-checker').addClass('black-king');
-																	this_this.children('.black-king').html('King');
+																	
 																	//remove red checker
 																	$('.checker-cell[data-cell="'+v.data_cell+'"]').empty();
-																	$('.checker-cell[data-cell="'+v.data_cell+'"]').append(select_move_number);
+																	
 														
 																	$('.checker-cell').removeClass('move-checker');
 																	$('.checker-cell').removeClass('move-double');
@@ -1324,13 +1330,13 @@
 																}else{
 																	//move to black checker
 																	$('.checker-cell[data-cell="'+select_cell+'"]').empty();
-																	$('.checker-cell[data-cell="'+select_cell+'"]').append(select_move_number);
+																	
 																	this_this.append(select_move);
 																	$('.checker-cell').removeClass('move-checker');
 																	$('.checker-cell').removeClass('move-double');
 																	//remove red checker
 																	$('.checker-cell[data-cell="'+v.data_cell+'"]').empty();
-																	$('.checker-cell[data-cell="'+v.data_cell+'"]').append(select_move_number);
+																	
 
 																	//even double jump
 																	if ( move_row_count_double == 4) {
@@ -1353,7 +1359,7 @@
 																					double_next_left = "yes"
 																					console.log('left');
 																				}
-																				if( val.cell == eval(move_checkercell_count) - 1 ){
+																				if( val.cell == eval(move_checkercell_count) + 1 ){
 																					double_next_right = "yes"
 																					console.log('right');
 																				}	
@@ -1429,13 +1435,13 @@
 													
 																	//change to k and add black king class
 																	$('.checker-cell[data-cell="'+select_cell+'"]').empty();
-																	$('.checker-cell[data-cell="'+select_cell+'"]').append(select_move_number);
+																	
 																	this_this.append(select_move);
 																	this_this.children('.black-checker').addClass('black-king');
-																	this_this.children('.black-king').html('King');
+																	
 																	//remove red checker
 																	$('.checker-cell[data-cell="'+v.data_cell+'"]').empty();
-																	$('.checker-cell[data-cell="'+v.data_cell+'"]').append(select_move_number);
+																	
 											
 																	console.log("no double jump possible");
 																	$('.checker-cell').removeClass('move-checker');
@@ -1449,13 +1455,13 @@
 																}else{
 																	//move to black checker
 																	$('.checker-cell[data-cell="'+select_cell+'"]').empty();
-																	$('.checker-cell[data-cell="'+select_cell+'"]').append(select_move_number);
+																	
 																	this_this.append(select_move);
 																	$('.checker-cell').removeClass('move-checker');
 																	$('.checker-cell').removeClass('move-double');
 																	//remove red checker
 																	$('.checker-cell[data-cell="'+v.data_cell+'"]').empty();
-																	$('.checker-cell[data-cell="'+v.data_cell+'"]').append(select_move_number);
+																	
 
 																	if ( move_row_count_double == 4) {
 																		console.log("no double jump possible");
@@ -1478,7 +1484,7 @@
 																					double_next_left = "yes"
 																					console.log('left');
 																				}
-																				if( val.cell == eval(move_checkercell_count) - 1 ){
+																				if( val.cell == eval(move_checkercell_count) + 1 ){
 																					double_next_right = "yes"
 																					console.log('right');
 																				}	
@@ -1558,13 +1564,13 @@
 													
 																	//change to k and add black king class
 																	$('.checker-cell[data-cell="'+select_cell+'"]').empty();
-																	$('.checker-cell[data-cell="'+select_cell+'"]').append(select_move_number);
+																	
 																	this_this.append(select_move);
 																	this_this.children('.black-checker').addClass('black-king');
-																	this_this.children('.black-king').html('King');
+																	
 																	//remove red checker
 																	$('.checker-cell[data-cell="'+v.data_cell+'"]').empty();
-																	$('.checker-cell[data-cell="'+v.data_cell+'"]').append(select_move_number);
+																	
 													
 																	$('.checker-cell').removeClass('move-checker');
 																	$('.checker-cell').removeClass('move-double');
@@ -1577,13 +1583,13 @@
 																}else{
 																	//move to black checker
 																	$('.checker-cell[data-cell="'+select_cell+'"]').empty();
-																	$('.checker-cell[data-cell="'+select_cell+'"]').append(select_move_number);
+																	
 																	this_this.append(select_move);
 																	$('.checker-cell').removeClass('move-checker');
 																	$('.checker-cell').removeClass('move-double');
 																	//remove red checker
 																	$('.checker-cell[data-cell="'+v.data_cell+'"]').empty();
-																	$('.checker-cell[data-cell="'+v.data_cell+'"]').append(select_move_number);
+																	
 																	 console.log(move_row_count_double);
 
 																	//odd doubel jump
@@ -1682,13 +1688,13 @@
 													
 																	//change to k and add black king class
 																	$('.checker-cell[data-cell="'+select_cell+'"]').empty();
-																	$('.checker-cell[data-cell="'+select_cell+'"]').append(select_move_number);
+																	
 																	this_this.append(select_move);
 																	this_this.children('.black-checker').addClass('black-king');
-																	this_this.children('.black-king').html('King');
+																	
 																	//remove red checker
 																	$('.checker-cell[data-cell="'+v.data_cell+'"]').empty();
-																	$('.checker-cell[data-cell="'+v.data_cell+'"]').append(select_move_number);
+																	
 													
 																	$('.checker-cell').removeClass('move-checker');
 																	$('.checker-cell').removeClass('move-double');
@@ -1701,14 +1707,14 @@
 																}else{
 																	//move to black checker
 																	$('.checker-cell[data-cell="'+select_cell+'"]').empty();
-																	$('.checker-cell[data-cell="'+select_cell+'"]').append(select_move_number);
+																	
 																	this_this.append(select_move);
 																	$('.checker-cell').removeClass('move-checker');
 																	$('.checker-cell').removeClass('move-double');
 																	double_jump_active = false;
 																	//remove red checker
 																	$('.checker-cell[data-cell="'+v.data_cell+'"]').empty();
-																	$('.checker-cell[data-cell="'+v.data_cell+'"]').append(select_move_number);
+																	
 
 																	if ( move_row_count_double == 4) {
 																		console.log("no double jump possible");
@@ -1860,7 +1866,9 @@
 
 						//info to move selected checker
 						select_move = $(this).children('.black-checker').get(0).outerHTML;
-						select_move_number = $(this).children('.move-count').get(0).outerHTML;
+						/*//used for testing
+						select_move_number = $(this).children('.move-count').get(0).outerHTML;*/
+						
 						select_cell = $(this).attr('data-cell');
 						//get king data
 						select_king_exist = $(this).children('.black-king').length;
@@ -1908,6 +1916,13 @@
 
 					$('#red_score').html(red_checker_count);
 					$('#black_score').html(black_checker_count);
+					
+					if( $('#red_score').html() == 0 ){
+					alert("Black wins!... press the reset button to play again!!");
+					}
+					if( $('#black_score').html() == 0 ){
+						alert("Red wins!... press the reset button to play again!!");
+					}
 				// <------------------------------->
 
 				if( $('.checker-cell').hasClass('move-checker') ){
@@ -1939,7 +1954,7 @@
 											console.log("valid move");
 										
 											$('.checker-cell[data-cell="'+select_cell+'"]').empty();
-											$('.checker-cell[data-cell="'+select_cell+'"]').append(select_move_number);
+											
 											$(this).append(select_move);
 											$('.checker-cell').removeClass('move-checker');
 											$('.checker-cell').removeClass('move-double');
@@ -1959,7 +1974,7 @@
 											console.log("valid move");
 											
 											$('.checker-cell[data-cell="'+select_cell+'"]').empty();
-											$('.checker-cell[data-cell="'+select_cell+'"]').append(select_move_number);
+											
 											$(this).append(select_move);
 											$('.checker-cell').removeClass('move-checker');
 											$('.checker-cell').removeClass('move-double');
@@ -2014,7 +2029,7 @@
 											//find red checker to jump
 											jump_count = 0;
 											$.each(blacks, function(i, v){
-												//if going down board----------->
+												//if going down board 8 -----------> 1
 												if( v.row == eval(select_row_count) - 1 ){
 													// console.log('Red in: '+v.cell);
 													//if row is even
@@ -2025,14 +2040,14 @@
 															
 															//move to black checker
 															$('.checker-cell[data-cell="'+select_cell+'"]').empty();
-															$('.checker-cell[data-cell="'+select_cell+'"]').append(select_move_number);
+															
 															this_this.append(select_move);
 															$('.checker-cell').removeClass('move-checker');
 															//remove red checker
 															$('.checker-cell[data-cell="'+v.data_cell+'"]').empty();
-															$('.checker-cell[data-cell="'+v.data_cell+'"]').append(select_move_number);
+															
 															//update done counter
-															alert('Jump Move completed');
+															
 
 															//even double jump
 															if ( move_row_count_double == 4) {
@@ -2055,7 +2070,7 @@
 																			double_next_left = "yes"
 																			console.log('left');
 																		}
-																		if( val.cell == eval(move_checkercell_count) - 1 ){
+																		if( val.cell == eval(move_checkercell_count) + 1 ){
 																			double_next_right = "yes"
 																			console.log('right');
 																		}	
@@ -2130,14 +2145,14 @@
 
 															//move to black checker
 															$('.checker-cell[data-cell="'+select_cell+'"]').empty();
-															$('.checker-cell[data-cell="'+select_cell+'"]').append(select_move_number);
+															
 															this_this.append(select_move);
 															$('.checker-cell').removeClass('move-checker');
 															//remove red checker
 															$('.checker-cell[data-cell="'+v.data_cell+'"]').empty();
-															$('.checker-cell[data-cell="'+v.data_cell+'"]').append(select_move_number);
+															
 															//update done counter
-															alert('Jump Move completed');
+															
 
 															//even double jump
 															if ( move_row_count_double == 4) {
@@ -2160,7 +2175,7 @@
 																			double_next_left = "yes"
 																			console.log('left');
 																		}
-																		if( val.cell == eval(move_checkercell_count) - 1 ){
+																		if( val.cell == eval(move_checkercell_count) + 1 ){
 																			double_next_right = "yes"
 																			console.log('right');
 																		}	
@@ -2239,14 +2254,14 @@
 
 																//move to black checker
 																$('.checker-cell[data-cell="'+select_cell+'"]').empty();
-																$('.checker-cell[data-cell="'+select_cell+'"]').append(select_move_number);
+																
 																this_this.append(select_move);
 																$('.checker-cell').removeClass('move-checker');
 																//remove red checker
 																$('.checker-cell[data-cell="'+v.data_cell+'"]').empty();
-																$('.checker-cell[data-cell="'+v.data_cell+'"]').append(select_move_number);
+																
 																//update done counter
-																alert('Jump Move completed');
+																
 
 																//odd doubel jump
 																if ( move_row_count_double == 4) {
@@ -2306,10 +2321,6 @@
 																							$('.checker-cell').removeClass('move-checker');
 																							this_this.addClass('move-double');
 																							double_jump_active = true;
-
-																							
-																							
-
 																						}
 																					}
 																				}
@@ -2343,14 +2354,14 @@
 
 															//move to black checker
 															$('.checker-cell[data-cell="'+select_cell+'"]').empty();
-															$('.checker-cell[data-cell="'+select_cell+'"]').append(select_move_number);
+															
 															this_this.append(select_move);
 															$('.checker-cell').removeClass('move-checker');
 															//remove red checker
 															$('.checker-cell[data-cell="'+v.data_cell+'"]').empty();
-															$('.checker-cell[data-cell="'+v.data_cell+'"]').append(select_move_number);
+															
 															//update done counter
-															alert('Jump Move completed');
+															
 															
 															//odd doubel jump
 															if ( move_row_count_double == 4) {
@@ -2443,7 +2454,7 @@
 														}
 
 													}
-												//if going up board	<-----------------
+												//if going up board	1----------------->8
 												}else if ( v.row == eval(select_row_count) + 1){
 
 													// console.log('Red in: '+v.cell);
@@ -2455,14 +2466,14 @@
 															
 															//move to black checker
 															$('.checker-cell[data-cell="'+select_cell+'"]').empty();
-															$('.checker-cell[data-cell="'+select_cell+'"]').append(select_move_number);
+															
 															this_this.append(select_move);
 															$('.checker-cell').removeClass('move-checker');
 															//remove red checker
 															$('.checker-cell[data-cell="'+v.data_cell+'"]').empty();
-															$('.checker-cell[data-cell="'+v.data_cell+'"]').append(select_move_number);
+															
 															//update done counter
-															alert('Jump Move completed');
+															
 															
 															//even double jump
 															if ( move_row_count_double == 4) {
@@ -2558,14 +2569,14 @@
 
 															//move to black checker
 															$('.checker-cell[data-cell="'+select_cell+'"]').empty();
-															$('.checker-cell[data-cell="'+select_cell+'"]').append(select_move_number);
+															
 															this_this.append(select_move);
 															$('.checker-cell').removeClass('move-checker');
 															//remove red checker
 															$('.checker-cell[data-cell="'+v.data_cell+'"]').empty();
-															$('.checker-cell[data-cell="'+v.data_cell+'"]').append(select_move_number);
+															
 															//update done counter
-															alert('Jump Move completed');
+															
 															
 															//even double jump
 															if ( move_row_count_double == 4) {
@@ -2664,14 +2675,14 @@
 
 															//move to black checker
 															$('.checker-cell[data-cell="'+select_cell+'"]').empty();
-															$('.checker-cell[data-cell="'+select_cell+'"]').append(select_move_number);
+															
 															this_this.append(select_move);
 															$('.checker-cell').removeClass('move-checker');
 															//remove red checker
 															$('.checker-cell[data-cell="'+v.data_cell+'"]').empty();
-															$('.checker-cell[data-cell="'+v.data_cell+'"]').append(select_move_number);
+															
 															//update done counter
-															alert('Jump Move completed');
+															
 															
 															//odd double jump
 															if ( move_row_count_double == 4) {
@@ -2690,7 +2701,7 @@
 																$.each(blacks, function(key,val){
 																	if(val.row == eval(select_row_count) + 3){
 																		
-																		if( val.cell == eval(move_checkercell_count) + 1 ){
+																		if( val.cell == eval(move_checkercell_count) - 1 ){
 																			double_next_left = "yes"
 																			console.log('left');
 																		}
@@ -2767,14 +2778,14 @@
 
 															//move to black checker
 															$('.checker-cell[data-cell="'+select_cell+'"]').empty();
-															$('.checker-cell[data-cell="'+select_cell+'"]').append(select_move_number);
+															
 															this_this.append(select_move);
 															$('.checker-cell').removeClass('move-checker');
 															//remove red checker
 															$('.checker-cell[data-cell="'+v.data_cell+'"]').empty();
-															$('.checker-cell[data-cell="'+v.data_cell+'"]').append(select_move_number);
+															
 															//update done counter
-															alert('Jump Move completed');
+															
 															
 															//odd double jump
 															if ( move_row_count_double == 4) {
@@ -2793,7 +2804,7 @@
 																$.each(blacks, function(key,val){
 																	if(val.row == eval(select_row_count) + 3){
 																		
-																		if( val.cell == eval(move_checkercell_count) + 1 ){
+																		if( val.cell == eval(move_checkercell_count) - 1 ){
 																			double_next_left = "yes"
 																			console.log('left');
 																		}
@@ -2909,10 +2920,10 @@
 													
 													//change to k and add black king class
 													$('.checker-cell[data-cell="'+select_cell+'"]').empty();
-													$('.checker-cell[data-cell="'+select_cell+'"]').append(select_move_number);
+													
 													$(this).append(select_move);
 													$(this).children('.red-checker').addClass('red-king');
-													$(this).children('.red-king').html('King');
+													
 									
 													$('.checker-cell').removeClass('move-checker');
 													$('.checker-cell').removeClass('move-double');
@@ -2924,7 +2935,7 @@
 												}else{
 												
 													$('.checker-cell[data-cell="'+select_cell+'"]').empty();
-													$('.checker-cell[data-cell="'+select_cell+'"]').append(select_move_number);
+													
 													$(this).append(select_move);
 													$('.checker-cell').removeClass('move-checker');
 													$('.checker-cell').removeClass('move-double');
@@ -2946,10 +2957,10 @@
 													
 													//change to k and add black king class
 													$('.checker-cell[data-cell="'+select_cell+'"]').empty();
-													$('.checker-cell[data-cell="'+select_cell+'"]').append(select_move_number);
+													
 													$(this).append(select_move);
 													$(this).children('.red-checker').addClass('red-king');
-													$(this).children('.red-king').html('King');
+													
 									
 													$('.checker-cell').removeClass('move-checker');
 													$('.checker-cell').removeClass('move-double');
@@ -2960,7 +2971,7 @@
 													turn_black = true;
 												}else{
 													$('.checker-cell[data-cell="'+select_cell+'"]').empty();
-													$('.checker-cell[data-cell="'+select_cell+'"]').append(select_move_number);
+													
 													$(this).append(select_move);
 													$('.checker-cell').removeClass('move-checker');
 													$('.checker-cell').removeClass('move-double');
@@ -3024,13 +3035,13 @@
 													
 																	//change to k and add black king class
 																	$('.checker-cell[data-cell="'+select_cell+'"]').empty();
-																	$('.checker-cell[data-cell="'+select_cell+'"]').append(select_move_number);
+																	
 																	this_this.append(select_move);
 																	this_this.children('.red-checker').addClass('red-king');
-																	this_this.children('.red-king').html('King');
+																	
 																	//remove black checker
 																	$('.checker-cell[data-cell="'+v.data_cell+'"]').empty();
-																	$('.checker-cell[data-cell="'+v.data_cell+'"]').append(select_move_number);
+																	
 													
 																	$('.checker-cell').removeClass('move-checker');
 																	$('.checker-cell').removeClass('move-double');
@@ -3042,14 +3053,14 @@
 																}else{
 																	//move red checker
 																	$('.checker-cell[data-cell="'+select_cell+'"]').empty();
-																	$('.checker-cell[data-cell="'+select_cell+'"]').append(select_move_number);
+																	
 																	this_this.append(select_move);
 																	$('.checker-cell').removeClass('move-checker');
 																	//remove black checker
 																	$('.checker-cell[data-cell="'+v.data_cell+'"]').empty();
-																	$('.checker-cell[data-cell="'+v.data_cell+'"]').append(select_move_number);
+																	
 																	//update done counter
-																	alert('Jump Move completed');
+																	
 																	
 																	//even double jump
 																	if ( move_row_count_double == 4) {
@@ -3148,13 +3159,13 @@
 													
 																	//change to k and add black king class
 																	$('.checker-cell[data-cell="'+select_cell+'"]').empty();
-																	$('.checker-cell[data-cell="'+select_cell+'"]').append(select_move_number);
+																	
 																	this_this.append(select_move);
 																	this_this.children('.red-checker').addClass('red-king');
-																	this_this.children('.red-king').html('King');
+																	
 																	//remove black checker
 																	$('.checker-cell[data-cell="'+v.data_cell+'"]').empty();
-																	$('.checker-cell[data-cell="'+v.data_cell+'"]').append(select_move_number);
+																	
 													
 																	$('.checker-cell').removeClass('move-checker');
 																	$('.checker-cell').removeClass('move-double');
@@ -3166,14 +3177,14 @@
 																}else{
 																	//move red checker
 																	$('.checker-cell[data-cell="'+select_cell+'"]').empty();
-																	$('.checker-cell[data-cell="'+select_cell+'"]').append(select_move_number);
+																	
 																	this_this.append(select_move);
 																	$('.checker-cell').removeClass('move-checker');
 																	//remove black checker
 																	$('.checker-cell[data-cell="'+v.data_cell+'"]').empty();
-																	$('.checker-cell[data-cell="'+v.data_cell+'"]').append(select_move_number);
+																	
 																	//update done counter
-																	alert('Jump Move completed');
+																	
 																	
 																	//even double jump
 																	if ( move_row_count_double == 4) {
@@ -3275,13 +3286,13 @@
 													
 																	//change to k and add black king class
 																	$('.checker-cell[data-cell="'+select_cell+'"]').empty();
-																	$('.checker-cell[data-cell="'+select_cell+'"]').append(select_move_number);
+																	
 																	this_this.append(select_move);
 																	this_this.children('.red-checker').addClass('red-king');
-																	this_this.children('.red-king').html('King');
+																	
 																	//remove black checker
 																	$('.checker-cell[data-cell="'+v.data_cell+'"]').empty();
-																	$('.checker-cell[data-cell="'+v.data_cell+'"]').append(select_move_number);
+																	
 													
 																	$('.checker-cell').removeClass('move-checker');
 																	$('.checker-cell').removeClass('move-double');
@@ -3293,14 +3304,14 @@
 																}else{
 																	//move red checker
 																	$('.checker-cell[data-cell="'+select_cell+'"]').empty();
-																	$('.checker-cell[data-cell="'+select_cell+'"]').append(select_move_number);
+																	
 																	this_this.append(select_move);
 																	$('.checker-cell').removeClass('move-checker');
 																	//remove black checker
 																	$('.checker-cell[data-cell="'+v.data_cell+'"]').empty();
-																	$('.checker-cell[data-cell="'+v.data_cell+'"]').append(select_move_number);
+																	
 																	//update done counter
-																	alert('Jump Move completed');
+																	
 																	
 																	//odd double jump
 																	if ( move_row_count_double == 4) {
@@ -3319,7 +3330,7 @@
 																		$.each(blacks, function(key,val){
 																			if(val.row == eval(select_row_count) + 3){
 																				
-																				if( val.cell == eval(move_checkercell_count) + 1 ){
+																				if( val.cell == eval(move_checkercell_count) - 1 ){
 																					double_next_left = "yes"
 																					console.log('left');
 																				}
@@ -3397,13 +3408,13 @@
 													
 																	//change to k and add black king class
 																	$('.checker-cell[data-cell="'+select_cell+'"]').empty();
-																	$('.checker-cell[data-cell="'+select_cell+'"]').append(select_move_number);
+																	
 																	this_this.append(select_move);
 																	this_this.children('.red-checker').addClass('red-king');
-																	this_this.children('.red-king').html('King');
+																	
 																	//remove black checker
 																	$('.checker-cell[data-cell="'+v.data_cell+'"]').empty();
-																	$('.checker-cell[data-cell="'+v.data_cell+'"]').append(select_move_number);
+																	
 													
 																	$('.checker-cell').removeClass('move-checker');
 																	$('.checker-cell').removeClass('move-double');
@@ -3415,14 +3426,14 @@
 																}else{
 																	//move red checker
 																	$('.checker-cell[data-cell="'+select_cell+'"]').empty();
-																	$('.checker-cell[data-cell="'+select_cell+'"]').append(select_move_number);
+																	
 																	this_this.append(select_move);
 																	$('.checker-cell').removeClass('move-checker');
 																	//remove blackchecker
 																	$('.checker-cell[data-cell="'+v.data_cell+'"]').empty();
-																	$('.checker-cell[data-cell="'+v.data_cell+'"]').append(select_move_number);
+																	
 																	//update done counter
-																	alert('Jump Move completed');
+																	
 																	
 																	//odd double jump
 																	if ( move_row_count_double == 4) {
@@ -3441,7 +3452,7 @@
 																		$.each(blacks, function(key,val){
 																			if(val.row == eval(select_row_count) + 3){
 																				
-																				if( val.cell == eval(move_checkercell_count) + 1 ){
+																				if( val.cell == eval(move_checkercell_count) - 1 ){
 																					double_next_left = "yes"
 																					console.log('left');
 																				}
@@ -3575,7 +3586,8 @@
 
 						//info to move selected checker
 						select_move = $(this).children('.red-checker').get(0).outerHTML;
-						select_move_number = $(this).children('.move-count').get(0).outerHTML;
+						/*//used for testing
+						select_move_number = $(this).children('.move-count').get(0).outerHTML;*/
 						select_cell = $(this).attr('data-cell');
 						//get king data
 						select_king_exist = $(this).children('.red-king').length;
